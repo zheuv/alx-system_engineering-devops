@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -al / . .. /boot 
+find -L . .. /boot -maxdepth 1 -exec ls -al {} \;
