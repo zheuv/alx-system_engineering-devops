@@ -1,0 +1,2 @@
+#!/bin/bash
+awk '{count[$0]++} END {for (word in count) if (count[word] == 1) print word}' <<< "$1" | sort
