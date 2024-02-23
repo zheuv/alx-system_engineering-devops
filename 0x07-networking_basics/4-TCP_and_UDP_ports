@@ -1,17 +1,13 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
+# -u for UDP sockets
+# -l for listening sockets
+# -p for displaying PID and program name
+# -n for numeric port display
+# Use ss command for better compatibility and performance
+# -t for TCP sockets
+lsof -i -P -n | grep LISTEN
 
-echo "Active Internet connections (only servers)"
-echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
 
-# Display listening TCP ports
-netstat -tln | awk '/^tcp/ {print "tcp6       0      0 " $4 " " $5 " " $6 "\t" $7 "\t" $NF}' | column -t
-
-# Display listening UDP ports
-netstat -uln | awk '/^udp/ {print "udp6       0      0 " $4 " " $5 " " "\t\t\t" $6 "\t" $NF}' | column -t
-
-echo "Active UNIX domain sockets (only servers)"
-echo "Proto RefCnt Flags       Type       State         I-Node   PID/Program name    Path"
-
-# Display UNIX domain sockets
-netstat -lx | awk '$1 == "unix" {print $1 "  " $2 "      " $3 "     " $4 "       " $5 "     " $6 "\t\t" $7}' | column -t
+# Alternatively, use netstat if ss is not available:
+# netstat -tulpn | grep LISTEN | column -t
 
