@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+#Install nginx web server
 # Exit on any error
 set -e
 
