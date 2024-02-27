@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 #this script copies a file to the home directory of a server user
-if [$# -lt 3]; then
+if [ $# -lt 3 ]; then
 	echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
 	exit 1
 fi
 
-file_path = $1
-server_IP = $2
-username = $3
-Path2Private_key = $4
+file_path=$1
+server_IP=$2
+username=$3
+Path2Private_key=$4
 
-if [$# -lt 4]; then
-	scp -o StrictHostKeyChecking=no "$file_path" "$username@$server_IP":~./
+if [ $# -lt 4 ]; then
+	scp -o StrictHostKeyChecking=no "$file_path" "$username@$server_IP":~/
 else
-	scp -o StrictHostKeyChecking=no -i "$Path2Private_key" "$file_path" "$username@$server_IP":~./
+	scp -o StrictHostKeyChecking=no -i "$Path2Private_key" "$file_path" "$username@$server_IP":~/
 fi
