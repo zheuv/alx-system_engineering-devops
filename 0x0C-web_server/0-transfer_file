@@ -10,7 +10,7 @@ server_IP = $2
 username = $3
 Path2Private_key = $4
 
-if [$# -lt 3]; then
+if [$# -lt 4]; then
 	scp -o StrictHostKeyChecking=no "$file_path" "$username@$server_IP":~./
 else
 	scp -o StrictHostKeyChecking=no -i "$Path2Private_key" "$file_path" "$username@$server_IP":~./
