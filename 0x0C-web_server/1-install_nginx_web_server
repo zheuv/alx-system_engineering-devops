@@ -12,7 +12,3 @@ sudo sh -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html'
 
 # Restart Nginx service to apply changes
 sudo service nginx restart
-
-# Optional: Check if Nginx is running
-sudo service nginx status
-
