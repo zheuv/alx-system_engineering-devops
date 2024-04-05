@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# prints the record type and the destination of the subdomain
+if [ "$#" -eq 1 ]; then
+	subdomains=("www" "lb-01" "web-01" "web-02")
+	for subdomain in "${subdomains[@]}"; do
+		echo "$(dig $subdomain.$1 | awk '/ANSWER SECTION:/ {getline; print "The subdomain '"$subdomain"' is a "$4" record and points to "$5}')"
+	done
+elif [ "$#" -eq 2 ]; then
+	subdomain=$2
+	echo "$(dig $subdomain.$1 | awk '/ANSWER SECTION:/ {getline; print "The subdomain '"$subdomain"' is a "$4" record and points to "$5}')"
+fi
