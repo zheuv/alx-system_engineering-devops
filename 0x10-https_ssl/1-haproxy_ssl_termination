@@ -33,12 +33,13 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend haproxy
-        bind *:443 ssl crt /etc/letsencrypt/live/www.mouhcinewildane.tech/fullchain.pem
-        mode http
-        default_backend servers
-backend servers
-        mode http
+frontend http_front
+        bind *:80
+        bind *:443 ssl crt /etc/haproxy/ssl/www.mouhcinewildane.tech.pem
+        reqadd X-Forwarded-Proto:\ https
+        default_backend http_back
+
+backend http_back
         balance roundrobin
-        server 193545-web-01 100.26.167.133:80 check
-        server 193545-web-02 54.173.97.227:80 check
+        server server1 100.26.167.133:80 check
+        server server2 54.173.97.227:80 check
