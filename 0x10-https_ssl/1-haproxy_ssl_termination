@@ -33,13 +33,20 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend http_front
+frontend mouhcinewildane-frontend
         bind *:80
-        bind *:443 ssl crt /etc/haproxy/ssl/www.mouhcinewildane.tech.pem
-        reqadd X-Forwarded-Proto:\ https
-        default_backend http_back
+        mode http
+        http-request redirect scheme https code 301 unless { ssl_fc }
+        http-request set-header X_Forwarded-Proto http
+        default_backend mouhcinewildane-backend
 
-backend http_back
+frontend mouhcinewildane-frontend-https
+        bind *:443 ssl crt /etc/haproxy/certs/www.mouhcinewildane.tech.pem
+        http-request set-header X-Forwarded-Proto https
+        default_backend mouhcinewildane-backend
+
+backend mouhcinewildane-backend
+        mode http
         balance roundrobin
-        server server1 52.91.152.83:80 check
-        server server2 100.24.253.51:80 check
+        server 193545-web-01 52.91.152.83:80 check
+        server 193545-web-02 100.24.253.51:80 check
