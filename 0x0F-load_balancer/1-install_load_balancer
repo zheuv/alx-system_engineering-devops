@@ -12,8 +12,8 @@ frontend haproxy
 backend servers
         mode http
         balance roundrobin
-        server 193545-web-01 34.203.38.9:80 check
-        server 193545-web-02 3.86.13.195:80 check
+        server 193545-web-01 52.91.152.83:80 check
+        server 193545-web-02 100.24.253.51:80 check
 " | sudo tee -a /etc/haproxy/haproxy.cfg
 
 sudo sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
