@@ -10,12 +10,10 @@ def get_employee_todo_progress(employee_id):
     This function retrieves the employee's name and their TO
     It then calculates the number of completed tasks and the total
     Additionally, it lists the titles of the completed tasks.
-    
     Args:
         employee_id (int): The ID of the employee whose TODO list
-    
     Raises:
-        requests.exceptions.RequestException: If there 
+        requests.exceptions.RequestException: If there
     """
     try:
         # Fetch employee details
@@ -33,7 +31,10 @@ def get_employee_todo_progress(employee_id):
 
         # Calculate the number of completed and total tasks
         tt = len(todos_data)
-        done_tasks = [todo['title'] for todo in todos_data if todo['completed']]
+        done_tasks = []
+        for td in todos_data:
+            if td['completed']:
+                dons_tasks.append(td)
         ndt = len(done_tasks)
 
         # Display the results
@@ -44,10 +45,10 @@ def get_employee_todo_progress(employee_id):
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
 
+
 if __name__ == "__main__":
     """
     Main entry point of the script.
-    
     This block checks if the correct number of
     and calls the get_employee_todo_progress function.
     """
@@ -59,4 +60,3 @@ if __name__ == "__main__":
             get_employee_todo_progress(employee_id)
         except ValueError:
             print("Please provide a valid integer as employee ID.")
-
