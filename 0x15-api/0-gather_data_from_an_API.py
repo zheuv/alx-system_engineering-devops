@@ -34,7 +34,7 @@ def get_employee_todo_progress(employee_id):
         done_tasks = []
         for td in todos_data:
             if td['completed']:
-                dons_tasks.append(td)
+                done_tasks.append(td)
         ndt = len(done_tasks)
 
         # Display the results
