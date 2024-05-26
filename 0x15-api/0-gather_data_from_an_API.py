@@ -58,4 +58,3 @@ if __name__ == "__main__":
         except ValueError:
             print("Please provide a valid integer as employee ID.")
 
-  ]
