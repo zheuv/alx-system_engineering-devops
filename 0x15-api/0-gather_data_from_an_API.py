@@ -59,7 +59,3 @@ if __name__ == "__main__":
             print("Please provide a valid integer as employee ID.")
 
   ]
-
-https://jsonplaceholder.typicode.com/todos?userId=5&completed=true
-https://jsonplaceholder.typicode.com/todos?userId=5&completed=false
-  """
